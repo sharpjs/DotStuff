@@ -1,0 +1,66 @@
+<Project>
+
+  <!--
+    Copyright 2024 Jeffrey Sharp
+    SPDX-License-Identifier: ISC
+  -->
+
+  <!--
+    * Imported early: this -> NuGet package .props -> SDK .props -> project
+    * Many properties are not yet defined and behave as if empty.
+    * Provide defaults for properties here.
+    https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build
+  -->
+
+  <!-- Descriptive properties -->
+  <PropertyGroup>
+    <Product>DotStuff – A few helpful extensions for method chaining in C#</Product>
+    <VersionPrefix>0.0.0</VersionPrefix>
+    <Authors>Jeffrey Sharp</Authors>
+    <Company>Subatomix Research Inc.</Company>
+    <Copyright>© $([System.DateTime]::UtcNow.Year) $(Authors)</Copyright>
+    <PackageLicenseExpression>ISC</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/sharpjs/DotStuff</PackageProjectUrl>
+    <PackageProjectUrlRaw>$(PackageProjectUrl.Replace("github", "raw.githubusercontent"))</PackageProjectUrlRaw>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>$(PackageProjectUrlRaw)/main/icon.png</PackageIconUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>$(PackageProjectUrl)/blob/main/CHANGES.md</PackageReleaseNotes>
+    <PackageTags>extensions chain</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
+  </PropertyGroup>
+
+  <!-- Build properties -->
+  <PropertyGroup>
+    <LangVersion>12</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InheritDocEnabled>true</InheritDocEnabled>
+    <!--<NoWarn>CA1050;$(NoWarn)</NoWarn>-->
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <!-- Packaging properties -->
+  <PropertyGroup>
+    <PackageOutputPath>..\dist\</PackageOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <!-- Hide .root project output -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == '.root'">
+    <BaseOutputPath>.vs\.root\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>.vs\.root\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+
+  <!-- Version stamping (Subatomix.Build.Versioning.Semantic) -->
+  <PropertyGroup>
+    <StampFilePath>$(MSBuildThisFileDirectory)Stamp.props</StampFilePath>
+  </PropertyGroup>
+  <Import Project="$(StampFilePath)" Condition="Exists('$(StampFilePath)')"/>
+
+</Project>

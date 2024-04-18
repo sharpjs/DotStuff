@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+  <!-- https://github.com/microsoft/MSBuildSdks/tree/main/src/NoTargets -->
+
+  <!--
+    Copyright 2024 Jeffrey Sharp
+    SPDX-License-Identifier: ISC
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <IsPublishable>false</IsPublishable>
+    <IsPackable>false</IsPackable>
+    <DefaultItemExcludesInProjectFolder>
+      DotStuff*\**;
+      coverage\**;
+      dist\**;
+      $(DefaultItemExcludesInProjectFolder)
+    </DefaultItemExcludesInProjectFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="**"    Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder);$(MSBuildThisFile)" />
+    <None Include=".*\**" Exclude=".git\**;.vs\**" />
+  </ItemGroup>
+
+</Project>

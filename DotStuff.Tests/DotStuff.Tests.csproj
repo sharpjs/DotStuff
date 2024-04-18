@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Copyright 2024 Jeffrey Sharp
+    SPDX-License-Identifier: ISC
+  -->
+
+  <PropertyGroup>
+    <Description>Tests for DotStuff</Description>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Subatomix.Testing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotStuff\DotStuff.csproj" />
+  </ItemGroup>
+
+</Project>

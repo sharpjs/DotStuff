@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Copyright 2024 Jeffrey Sharp
+    SPDX-License-Identifier: ISC
+  -->
+
+  <PropertyGroup>
+    <Description>$(Product)</Description>
+    <TargetFramework>net8.0</TargetFramework>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <DefineConstants>DOTSTUFF_ENABLE_CODE_COVERAGE;DOTSTUFF_ENABLE_WARNINGS;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="@(Compile)" Pack="true" PackagePath="contentFiles\cs\net20;contentFiles\cs\netcoreapp1.0;contentFiles\cs\netstandard1.0;content" />
+    <None    Update="*.props"    Pack="true" PackagePath="build;buildMultiTargeting" />
+  </ItemGroup>
+
+</Project>

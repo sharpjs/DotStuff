@@ -1,0 +1,26 @@
+<Project>
+
+  <!--
+    Copyright 2024 Jeffrey Sharp
+    SPDX-License-Identifier: ISC
+  -->
+
+  <!--
+    Make DotStuff extension methods in-scope by default, where supported by SDK
+  -->
+  <ItemGroup>
+    <Using Include="DotStuff" />
+  </ItemGroup>
+
+  <!--
+    Do not show this package's .cs files in Visual Studio solution explorer
+    https://til.cazzulino.com/dotnet/nuget/hide-contentfiles-from-your-nuget-packages
+  -->
+  <ItemGroup>
+    <Compile
+      Update="@(Compile)"
+      Condition="'%(NuGetItemType)' == 'Compile' and '%(NuGetPackageId)' == 'DotStuff'"
+      Visible="false" />
+  </ItemGroup>
+
+</Project>

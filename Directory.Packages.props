@@ -1,0 +1,26 @@
+<Project>
+  <!--
+    Copyright 2024 Jeffrey Sharp
+    SPDX-License-Identifier: ISC
+  -->
+  <!--
+    Central Package Management
+    https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <!--<PackageVersion Include="..." Version="..." />-->
+  </ItemGroup>
+  <ItemGroup>
+    <GlobalPackageReference Include="SauceControl.InheritDoc" Version="2.0.1" />
+    <GlobalPackageReference Include="Subatomix.Build.Versioning.Semantic" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(IsTestProject)' != 'true'">
+    <GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Subatomix.Testing" Version="3.1.0" />
+  </ItemGroup>
+</Project>
