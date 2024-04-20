@@ -31,7 +31,7 @@ project.
 foo.AssignTo(out bar)       // => bar = foo;
 
 // Right coalesce
-foo.CoalesceWith(ref bar)   // => bar ??= foo;
+foo.CoalesceTo(ref bar)     // => bar ??= foo;
 
 // Tap
 foo.Tap(action);            // { action(foo);       return foo; }
