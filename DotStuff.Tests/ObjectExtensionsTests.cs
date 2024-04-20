@@ -3,6 +3,8 @@
 
 namespace DotStuff;
 
+using static String;
+
 [TestFixture]
 public class ObjectExtensionsTests
 {
@@ -23,7 +25,7 @@ public class ObjectExtensionsTests
         var valueA = "a";
         var tapped = null as string;
 
-        valueA.Tap("b", (a, b) => { tapped = a + b; }).Should().BeSameAs(valueA);
+        valueA.Tap("b", (a, b) => { tapped = Concat(a, b); }).Should().BeSameAs(valueA);
 
         tapped.Should().Be("ab");
     }
@@ -34,7 +36,7 @@ public class ObjectExtensionsTests
         var valueA = "a";
         var tapped = null as string;
 
-        valueA.Tap("b", "c", (a, b, c) => { tapped = a + b + c; }).Should().BeSameAs(valueA);
+        valueA.Tap("b", "c", (a, b, c) => { tapped = Concat(a, b, c); }).Should().BeSameAs(valueA);
 
         tapped.Should().Be("abc");
     }
@@ -42,19 +44,19 @@ public class ObjectExtensionsTests
     [Test]
     public void Apply0()
     {
-        "a".Apply(a => a + "b").Should().Be("ab");
+        "a".Apply(Concat).Should().Be("a");
     }
 
     [Test]
     public void Apply1()
     {
-        "a".Apply("b", (a, b) => a + b).Should().Be("ab");
+        "a".Apply("b", Concat).Should().Be("ab");
     }
 
     [Test]
     public void Apply2()
     {
-        "a".Apply("b", "c", (a, b, c) => a + b + c).Should().Be("abc");
+        "a".Apply("b", "c", Concat).Should().Be("abc");
     }
 
     [Test]
