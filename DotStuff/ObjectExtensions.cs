@@ -412,6 +412,53 @@ namespace DotStuff
             return location ??= value;
         }
 #endif
+
+#if DOTSTUFF_HAS_CSHARP_8_OR_GREATER
+        /// <summary>
+        ///   Assigns the value to the specified location if the location is
+        ///   <see langword="null"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        ///   The type of the <paramref name="location"/>.
+        /// </typeparam>
+        /// <param name="value">
+        ///   The value to assign.
+        /// </param>
+        /// <param name="location">
+        ///   The location to which the <paramref name="value"/> should be
+        ///   assigned if the location is <see langword="null"/>.
+        /// </param>
+        /// <remarks>
+        ///   <para>
+        ///     This method is a chainable version of the following code:
+        ///   </para>
+        ///   <code>
+        ///     location ??= value;
+        ///   </code>
+        /// </remarks>
+        /// <returns>
+        ///   The value stored in the <paramref name="location"/>.
+        /// </returns>
+#if DOTSTUFF_HAS_AGGRESSIVE_INLINING
+        [global::System.Runtime.CompilerServices.MethodImpl(
+            global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining
+        )]
+#endif
+#if DOTSTUFF_HAS_NULLABLE
+        [return: global::System.Diagnostics.CodeAnalysis.NotNullIfNotNull(nameof(value))]
+        [return: global::System.Diagnostics.CodeAnalysis.NotNullIfNotNull(nameof(location))]
+#endif
+        public static T CoalesceTo<T>(
+            this T value,
+#if DOTSTUFF_HAS_NULLABLE
+            [global::System.Diagnostics.CodeAnalysis.NotNullIfNotNull(nameof(value))]
+#endif
+            ref global::System.Nullable<T> location)
+            where T : struct
+        {
+            return location ??= value;
+        }
+#endif
     }
 }
 
