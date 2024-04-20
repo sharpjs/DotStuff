@@ -81,6 +81,8 @@ namespace DotStuff
 #endif
     static class ObjectExtensions
     {
+        #region Tap
+
         /// <summary>
         ///   Passes the value to the specified action and returns the value.
         /// </summary>
@@ -201,6 +203,9 @@ namespace DotStuff
             action(value, arg1, arg2);
             return value;
         }
+
+        #endregion
+        #region Apply
 
         /// <summary>
         ///   Passes the value to the specified function and returns the result
@@ -325,6 +330,9 @@ namespace DotStuff
             return function(value, arg1, arg2);
         }
 
+        #endregion
+        #region AssignTo
+
         /// <summary>
         ///   Assigns the value to the specified location.
         /// </summary>
@@ -366,6 +374,9 @@ namespace DotStuff
         {
             return location = value;
         }
+
+        #endregion
+        #region CoalesceTo
 
 #if DOTSTUFF_HAS_CSHARP_8_OR_GREATER
         /// <summary>
@@ -459,6 +470,7 @@ namespace DotStuff
             return location ??= value;
         }
 #endif
+        #endregion
     }
 }
 
