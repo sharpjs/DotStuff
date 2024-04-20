@@ -348,6 +348,9 @@ namespace DotStuff
         /// <typeparam name="T1">
         ///   The type of <paramref name="arg1"/>.
         /// </typeparam>
+        /// <typeparam name="T2">
+        ///   The type of <paramref name="arg2"/>.
+        /// </typeparam>
         /// <typeparam name="TResult">
         ///   The type of the result of <paramref name="function"/>.
         /// </typeparam>
