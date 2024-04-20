@@ -7,44 +7,109 @@ namespace DotStuff;
 public class ObjectExtensionsTests
 {
     [Test]
-    public void Tap_ReferenceType()
+    public void Tap0()
     {
-        var (value, tapped) = ("a", default(string));
+        var valueA = "a";
+        var tapped = null as string;
 
-        value.Tap(s => { tapped = s; }).Should().BeSameAs(value);
+        valueA.Tap(a => { tapped = a; }).Should().BeSameAs(valueA);
 
-        tapped.Should().BeSameAs(value);
+        tapped.Should().BeSameAs(valueA);
     }
 
     [Test]
-    public void TapWithArg_ReferenceType()
+    public void Tap1()
     {
-        var (value, tapped, arged) = ("a", default(string), default(int));
+        var valueA = "a";
+        var tapped = null as string;
 
-        value.Tap(42, (s, a) => { tapped = s; arged = a; }).Should().BeSameAs(value);
+        valueA.Tap("b", (a, b) => { tapped = a + b; }).Should().BeSameAs(valueA);
 
-        tapped.Should().BeSameAs(value);
+        tapped.Should().Be("ab");
     }
 
     [Test]
-    public void Tap_ValueType()
+    public void Tap2()
     {
-        var (value, tapped) = (42, default(int));
+        var valueA = "a";
+        var tapped = null as string;
 
-        value.Tap(n => tapped = n).Should().Be(value);
+        valueA.Tap("b", "c", (a, b, c) => { tapped = a + b + c; }).Should().BeSameAs(valueA);
 
-        tapped.Should().Be(value);
+        tapped.Should().Be("abc");
     }
 
     [Test]
-    public void Apply_ReferenceType()
+    public void Apply0()
     {
-        "a".Apply(s => s + "b").Should().Be("ab");
+        "a".Apply(a => a + "b").Should().Be("ab");
     }
 
     [Test]
-    public void Apply_ValueType()
+    public void Apply1()
     {
-        42.Apply(x => x + 81).Should().Be(123);
+        "a".Apply("b", (a, b) => a + b).Should().Be("ab");
+    }
+
+    [Test]
+    public void Apply2()
+    {
+        "a".Apply("b", "c", (a, b, c) => a + b + c).Should().Be("abc");
+    }
+
+    [Test]
+    public void AssignTo()
+    {
+        var valueA = "a";
+
+        valueA.AssignTo(out var location).Should().BeSameAs(valueA);
+
+        location.Should().BeSameAs(valueA);
+    }
+
+    [Test]
+    public void CoalesceTo_T_Null()
+    {
+        var valueA   = "a";
+        var location = null as string;
+
+        valueA.CoalesceTo(ref location).Should().BeSameAs(valueA);
+
+        location.Should().BeSameAs(valueA);
+    }
+
+    [Test]
+    public void CoalesceTo_T_NotNull()
+    {
+        var valueA   = "a";
+        var valueB   = "b";
+        var location = valueB;
+
+        valueA.CoalesceTo(ref location).Should().BeSameAs(valueB);
+
+        location.Should().BeSameAs(valueB);
+    }
+
+    [Test]
+    public void CoalesceTo_NullableOfT_Null()
+    {
+        var valueA   = 1;
+        var location = null as int?;
+
+        valueA.CoalesceTo(ref location).Should().Be(valueA);
+
+        location.Should().Be(valueA);
+    }
+
+    [Test]
+    public void CoalesceTo_NullableOfT_NotNull()
+    {
+        var valueA   = 1;
+        var valueB   = 2;
+        var location = valueB as int?;
+
+        valueA.CoalesceTo(ref location).Should().Be(valueB);
+
+        location.Should().Be(valueB);
     }
 }
