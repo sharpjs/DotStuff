@@ -17,10 +17,9 @@
     https://til.cazzulino.com/dotnet/nuget/hide-contentfiles-from-your-nuget-packages
   -->
   <ItemGroup>
-    <Compile
-      Update="@(Compile)"
-      Condition="'%(NuGetItemType)' == 'Compile' and '%(NuGetPackageId)' == 'DotStuff'"
-      Visible="false" />
+    <Compile Update="@(Compile)">
+      <Visible Condition="'%(NuGetItemType)' == 'Compile' And '%(NuGetPackageId)' == 'DotStuff'">false</Visible>
+    </Compile>
   </ItemGroup>
 
 </Project>
