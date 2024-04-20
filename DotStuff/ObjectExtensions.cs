@@ -204,6 +204,59 @@ namespace DotStuff
             return value;
         }
 
+        /// <summary>
+        ///   Passes the value to the specified action and returns the value.
+        /// </summary>
+        /// <typeparam name="T0">
+        ///   The type of <paramref name="value"/>.
+        /// </typeparam>
+        /// <typeparam name="T1">
+        ///   The type of <paramref name="arg1"/>.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        ///   The type of <paramref name="arg2"/>.
+        /// </typeparam>
+        /// <typeparam name="T3">
+        ///   The type of <paramref name="arg3"/>.
+        /// </typeparam>
+        /// <param name="value">
+        ///   The value to pass to the <paramref name="action"/>.
+        /// </param>
+        /// <param name="arg1">
+        ///   An argument to pass to the <paramref name="action"/>.
+        /// </param>
+        /// <param name="arg2">
+        ///   An argument to pass to the <paramref name="action"/>.
+        /// </param>
+        /// <param name="arg3">
+        ///   An argument to pass to the <paramref name="action"/>.
+        /// </param>
+        /// <param name="action">
+        ///   The action to invoke.
+        /// </param>
+        /// <remarks>
+        ///   This method is inspired by Ruby's
+        ///   <see href="https://ruby-doc.org/3.3.0/Kernel.html#method-i-tap">tap</see>
+        ///   method, which enables the developer to 'tap into' a method chain
+        ///   and perform some operation on an intermediate result within the
+        ///   chain.
+        /// </remarks>
+        /// <returns>
+        ///   The <paramref name="value"/>.
+        /// </returns>
+#if DOTSTUFF_HAS_AGGRESSIVE_INLINING
+        [global::System.Runtime.CompilerServices.MethodImpl(
+            global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining
+        )]
+#endif
+        public static T0 Tap<T0, T1, T2, T3>(
+            this T0 value, T1 arg1, T2 arg2, T3 arg3,
+            global::System.Action<T0, T1, T2, T3> action)
+        {
+            action(value, arg1, arg2, arg3);
+            return value;
+        }
+
         #endregion
         #region Apply
 
@@ -328,6 +381,60 @@ namespace DotStuff
             global::System.Func<T, T1, T2, TResult> function)
         {
             return function(value, arg1, arg2);
+        }
+
+        /// <summary>
+        ///   Passes the value to the specified function and returns the result
+        ///   of the function.
+        /// </summary>
+        /// <typeparam name="T">
+        ///   The type of <paramref name="value"/>.
+        /// </typeparam>
+        /// <typeparam name="T1">
+        ///   The type of <paramref name="arg1"/>.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        ///   The type of <paramref name="arg2"/>.
+        /// </typeparam>
+        /// <typeparam name="T3">
+        ///   The type of <paramref name="arg3"/>.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        ///   The type of the result of <paramref name="function"/>.
+        /// </typeparam>
+        /// <param name="value">
+        ///   The value to pass to the <paramref name="function"/>.
+        /// </param>
+        /// <param name="arg1">
+        ///   An argument to pass to the <paramref name="function"/>.
+        /// </param>
+        /// <param name="arg2">
+        ///   An argument to pass to the <paramref name="function"/>.
+        /// </param>
+        /// <param name="arg3">
+        ///   An argument to pass to the <paramref name="function"/>.
+        /// </param>
+        /// <param name="function">
+        ///   The function to invoke.
+        /// </param>
+        /// <remarks>
+        ///   This method is inspired by Ruby's
+        ///   <see href="https://ruby-doc.org/3.3.0/Kernel.html#method-i-then">then</see>
+        ///   method.
+        /// </remarks>
+        /// <returns>
+        ///   The result of the <paramref name="function"/>.
+        /// </returns>
+#if DOTSTUFF_HAS_AGGRESSIVE_INLINING
+        [global::System.Runtime.CompilerServices.MethodImpl(
+            global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining
+        )]
+#endif
+        public static TResult Apply<T, T1, T2, T3, TResult>(
+            this T value, T1 arg1, T2 arg2, T3 arg3,
+            global::System.Func<T, T1, T2, T3, TResult> function)
+        {
+            return function(value, arg1, arg2, arg3);
         }
 
         #endregion

@@ -42,6 +42,17 @@ public class ObjectExtensionsTests
     }
 
     [Test]
+    public void Tap3()
+    {
+        var valueA = "a";
+        var tapped = null as string;
+
+        valueA.Tap("b", "c", "d", (a, b, c, d) => { tapped = Concat(a, b, c, d); }).Should().BeSameAs(valueA);
+
+        tapped.Should().Be("abcd");
+    }
+
+    [Test]
     public void Apply0()
     {
         "a".Apply(Concat).Should().Be("a");
@@ -57,6 +68,12 @@ public class ObjectExtensionsTests
     public void Apply2()
     {
         "a".Apply("b", "c", Concat).Should().Be("abc");
+    }
+
+    [Test]
+    public void Apply3()
+    {
+        "a".Apply("b", "c", "d", Concat).Should().Be("abcd");
     }
 
     [Test]
