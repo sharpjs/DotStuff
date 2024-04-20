@@ -3,7 +3,7 @@
 
 namespace DotStuff;
 
-using static String;
+using static TestHash;
 
 [TestFixture]
 public class ObjectExtensionsTests
@@ -11,69 +11,89 @@ public class ObjectExtensionsTests
     [Test]
     public void Tap0()
     {
-        var valueA = "a";
-        var tapped = null as string;
+        var (value, hash) = ("a", 0u);
 
-        valueA.Tap(a => { tapped = a; }).Should().BeSameAs(valueA);
+        void F(string a)
+            => hash = Zero + a;
 
-        tapped.Should().BeSameAs(valueA);
+        value.Tap(F).Should().BeSameAs(value);
+
+        hash.Should().Be(97u);
     }
 
     [Test]
     public void Tap1()
     {
-        var valueA = "a";
-        var tapped = null as string;
+        var (value, hash) = ("a", 0u);
 
-        valueA.Tap("b", (a, b) => { tapped = Concat(a, b); }).Should().BeSameAs(valueA);
+        void F(string a, string b)
+            => hash = Zero + a + b;
 
-        tapped.Should().Be("ab");
+        value.Tap("b", F).Should().BeSameAs(value);
+
+        hash.Should().Be(874u);
     }
 
     [Test]
     public void Tap2()
     {
-        var valueA = "a";
-        var tapped = null as string;
+        var (value, hash) = ("a", 0u);
 
-        valueA.Tap("b", "c", (a, b, c) => { tapped = Concat(a, b, c); }).Should().BeSameAs(valueA);
+        void F(string a, string b, string c)
+            => hash = Zero + a + b + c;
 
-        tapped.Should().Be("abc");
+        value.Tap("b", "c", F).Should().BeSameAs(value);
+
+        hash.Should().Be(7091u);
     }
 
     [Test]
     public void Tap3()
     {
-        var valueA = "a";
-        var tapped = null as string;
+        var (value, hash) = ("a", 0u);
 
-        valueA.Tap("b", "c", "d", (a, b, c, d) => { tapped = Concat(a, b, c, d); }).Should().BeSameAs(valueA);
+        void F(string a, string b, string c, string d)
+            => hash = Zero + a + b + c + d;
 
-        tapped.Should().Be("abcd");
+        value.Tap("b", "c", "d", F).Should().BeSameAs(value);
+
+        hash.Should().Be(56828u);
     }
 
     [Test]
     public void Apply0()
     {
-        "a".Apply(Concat).Should().Be("a");
+        static uint F(string a)
+            => Zero + a;
+
+        "a".Apply(F).Should().Be(97u);
     }
 
     [Test]
     public void Apply1()
     {
-        "a".Apply("b", Concat).Should().Be("ab");
+        static uint F(string a, string b)
+            => Zero + a + b;
+
+        "a".Apply("b", F).Should().Be(874u);
     }
 
     [Test]
     public void Apply2()
     {
-        "a".Apply("b", "c", Concat).Should().Be("abc");
+        static uint F(string a, string b, string c)
+            => Zero + a + b + c;
+
+        "a".Apply("b", "c", F).Should().Be(7091u);
     }
 
     [Test]
     public void Apply3()
     {
-        "a".Apply("b", "c", "d", Concat).Should().Be("abcd");
+        static uint F(string a, string b, string c, string d)
+            => Zero + a + b + c + d;
+
+        "a".Apply("b", "c", "d", F).Should().Be(56828u);
     }
 
     [Test]
