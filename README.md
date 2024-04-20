@@ -11,22 +11,13 @@ carefully to avoid conflicts with existing code.
 
 ## Status
 
-WIP
-
-<!--
 [![Build](https://github.com/sharpjs/DotStuff/workflows/Build/badge.svg)](https://github.com/sharpjs/DotStuff/actions)
 [![NuGet](https://img.shields.io/nuget/v/DotStuff.svg)](https://www.nuget.org/packages/DotStuff)
 [![NuGet](https://img.shields.io/nuget/dt/DotStuff.svg)](https://www.nuget.org/packages/DotStuff)
-[![NuGet](https://img.shields.io/powershellgallery/v/DotStuff.svg)](https://www.powershellgallery.com/packages/DotStuff)
-[![NuGet](https://img.shields.io/powershellgallery/dt/DotStuff.svg)](https://www.powershellgallery.com/packages/DotStuff)
 
-- **Stable(ish):** a prior version has been in private use for years with no
-                   reported defects, but a few changes have been made in
-                   preparation for public release.
 - **Tested:**      100% coverage by automated tests.
-- **Documented:**  IntelliSense on everything.  General usage documentation
-                   is in progress.
--->
+
+- **Documented:**  IntelliSense on everything.  Examples below.
 
 ## Installation
 
