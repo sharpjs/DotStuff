@@ -37,11 +37,11 @@ jobs:
 
     steps:
       - name: Check Out Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         #url: https://github.com/actions/checkout
 
       - name: Configure .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         #url: https://github.com/actions/setup-dotnet
         with:
           dotnet-version: 8.0.x
@@ -81,7 +81,7 @@ jobs:
           verbosity: Warning
 
       - name: Save Coverage Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         #url: https://github.com/actions/upload-artifact
         with:
           name: Coverage Report
@@ -96,7 +96,7 @@ jobs:
           REPORT_PATH: ${{ runner.temp }}\coverage\SummaryGithub.md
 
       - name: Save Package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         #url: https://github.com/actions/upload-artifact
         with:
           name: Packages
