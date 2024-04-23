@@ -34,17 +34,24 @@ foo.AssignTo(out bar)       // => bar = foo;
 foo.CoalesceTo(ref bar)     // => bar ??= foo;
 
 // Tap
-foo.Tap(action);            // { action(foo);       return foo; }
-foo.Tap(action, x)          // { action(foo, x);    return foo; }
-foo.Tap(action, x, y)       // { action(foo, x, y); return foo; }
+foo.Tap(action)             // { action(foo);       return foo; }
+foo.Tap(x, action)          // { action(foo, x);    return foo; }
+foo.Tap(x, y, action)       // { action(foo, x, y); return foo; }
 // ... up to 3 extra arguments
 
 // Apply
-foo.Apply(function);        // => function(foo);
-foo.Apply(function, x)      // => function(foo, x);
-foo.Apply(function, x, y)   // => function(foo, x, y);
+foo.Apply(function)         // => function(foo);
+foo.Apply(x, function)      // => function(foo, x);
+foo.Apply(x, y, function)   // => function(foo, x, y);
 // ... up to 3 extra arguments
 ```
+
+For Ruby developers, `Tap` and `Apply` are the C# equivalents of
+[`tap`](https://ruby-doc.org/3.3.0/Kernel.html#method-i-tap) and
+[`then`](https://ruby-doc.org/3.3.0/Kernel.html#method-i-then).
+`AssignTo` is similar to using Ruby's `=>`
+[pattern-matching](https://ruby-doc.org/3.3.0/syntax/pattern_matching_rdoc.html)
+operator for rightward assignment.
 
 ## Options
 
