@@ -26,7 +26,7 @@
     <PackageIconUrl>$(PackageProjectUrlRaw)/main/icon.png</PackageIconUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>$(PackageProjectUrl)/blob/main/CHANGES.md</PackageReleaseNotes>
-    <PackageTags>extensions chain</PackageTags>
+    <PackageTags>source-only extensions extension-methods chain assignto coalesceto tap apply</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
   </PropertyGroup>
